@@ -9,5 +9,4 @@ public class RestaurantDsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RestaurantDsApplication.class, args);
 	}
-
 }
