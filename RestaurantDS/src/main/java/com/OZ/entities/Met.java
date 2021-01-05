@@ -1,6 +1,5 @@
 package com.OZ.entities;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.DiscriminatorColumn;
@@ -10,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
@@ -28,9 +28,9 @@ public abstract class Met {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
 	private String nom;
 	private double prix;
 	@ManyToMany(mappedBy = "mets")
+	@JsonIgnore
 	private List<Ticket> tickets;
 }

@@ -1,6 +1,8 @@
 package com.OZ.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -14,27 +16,34 @@ import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 public class Ticket {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer	numero;
-	private LocalDate date;
+	private LocalDateTime date;
 	private Integer nbCouvert;
 	private double addition;
 	
 	@ManyToOne
 	private Client client;
 	@ManyToOne
-	private TableResto Tab; 
+	private TableResto tableResto; 
 	@ManyToMany
 	@JoinTable(name = "MET_Ticket",
 		joinColumns = {@JoinColumn(name="Ticket_id")},
 		inverseJoinColumns = {@JoinColumn(name="Met_id")	})
 	private List<Met> mets;
+	
+	public double getAddition() {
+		//return mets.stream().mapToDouble(s->s.getPrix()).sum();
+		return addition;
+	}
+	
 }

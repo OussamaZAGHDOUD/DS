@@ -8,14 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter 
+@Setter
 public class TableResto {
 
 	@Id
@@ -26,7 +29,8 @@ public class TableResto {
 	private double supplement;
 
 	private String type;
-	@OneToMany(mappedBy = "Tab")
+	@OneToMany(mappedBy = "tableResto")
+	@JsonIgnore
 	private List<Ticket> tickets;
 	
 }

@@ -1,0 +1,7 @@
+{ 
+    "nom":"oussama",
+    "prenom":"zaghdoud",
+    "dateNaissance":"2015-02-02",
+	"courriel":"oussamazaghdoud1991@gmail.com",
+	"telephone":"27652211"
+}
