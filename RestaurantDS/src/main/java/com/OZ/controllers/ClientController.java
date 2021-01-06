@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.OZ.dto.ClientDto;
-import com.OZ.entities.Client;
 import com.OZ.exceptions.ClientNotFoundException;
 import com.OZ.repositories.ClientRepository;
 import com.OZ.services.IClientService;

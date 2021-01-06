@@ -8,9 +8,8 @@ import com.OZ.entities.Ticket;
 
 public interface ITicketService {
 	TicketDto ajouterTicket(TicketDto ticketDto);
-	Ticket modifierTicket(Ticket ticket);
-	Ticket supprimerTicket(TicketDto ticket);
-	Ticket chercherTicket(TicketDto ticket);
+	Ticket supprimerTicket(TicketDto ticketDto);
+	Ticket chercherTicket(TicketDto ticketDto);
 	List<Ticket> listerTicket(LocalDate date);
 
 

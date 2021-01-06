@@ -34,5 +34,5 @@ public class TicketDto {
 	private Client client;
 	@NotNull
 	private TableResto tableResto; 
-	private List<Met> mets;
+	private List<MetDto> mets;
 }

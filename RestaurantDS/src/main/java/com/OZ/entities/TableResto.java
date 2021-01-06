@@ -27,8 +27,8 @@ public class TableResto {
 	
 	private Integer nbCouvert;
 	private double supplement;
-
 	private String type;
+	
 	@OneToMany(mappedBy = "tableResto")
 	@JsonIgnore
 	private List<Ticket> tickets;

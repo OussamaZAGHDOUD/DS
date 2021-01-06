@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +36,7 @@ public class Ticket {
 	private Client client;
 	@ManyToOne
 	private TableResto tableResto; 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.REMOVE)
 	@JoinTable(name = "MET_Ticket",
 		joinColumns = {@JoinColumn(name="Ticket_id")},
 		inverseJoinColumns = {@JoinColumn(name="Met_id")	})
