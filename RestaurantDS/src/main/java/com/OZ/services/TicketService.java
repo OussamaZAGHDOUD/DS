@@ -1,6 +1,7 @@
 package com.OZ.services;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import java.util.Optional;
@@ -40,14 +41,15 @@ public class TicketService implements ITicketService {
 		TableResto table = tableRepository.findById(ticketDto.getTableResto().getNumero())
 				.orElseThrow(() -> new TableNotFoundException());
 
-		List<MetDto> listMetDto=ticketDto.getMets();
-		List<Met> lis = listMetDto.stream().map( (s) -> iMetService.chercherMet(iMetService.metMapper(s))    ).collect(Collectors.toList());
+		List<MetDto> listMetDto = ticketDto.getMets();
+		List<Met> lis = listMetDto.stream().map((s) -> iMetService.chercherMet(iMetService.metMapper(s)))
+				.collect(Collectors.toList());
 		ticketDto.setMets(null);
 		Ticket ticket = mapper.map(ticketDto, Ticket.class);
 		ticket.setMets(lis);
 		ticket.setClient(client);
 		ticket.setTableResto(table);
-		ticket=ticketRepository.save(ticket);
+		ticket = ticketRepository.save(ticket);
 		ticketDto = mapper.map(ticket, TicketDto.class);
 		return ticketDto;
 	}
@@ -73,5 +75,33 @@ public class TicketService implements ITicketService {
 
 	public double getAdd(TicketDto ticket) {
 		return chercherTicket(ticket).getAddition();
+	}
+
+	@Override
+	public double getRevenue(LocalDate d, String s) {
+		Period p;
+		if (s.equalsIgnoreCase("jour"))
+			p = Period.ofDays(1);
+		else if (s.equalsIgnoreCase("semaine"))
+			p = Period.ofWeeks(1);
+		else if (s.equalsIgnoreCase("mois"))
+			p = Period.ofMonths(1);
+		else
+			p = Period.ZERO;
+		double revenue = ticketRepository.findAll().stream()
+				.filter(t -> (t.getDate().toLocalDate().isAfter(d) || t.getDate().toLocalDate().isEqual(d))
+						&& t.getDate().toLocalDate().isBefore(d.plus(p)))
+				.mapToDouble(t -> t.getAddition()).sum();
+		return revenue;
+	}
+
+	@Override
+	public double getRevenuePourPeriode(LocalDate d1, LocalDate d2) {
+
+		double revenue = ticketRepository.findAll().stream()
+				.filter(t -> (t.getDate().toLocalDate().isAfter(d1) || t.getDate().toLocalDate().isEqual(d1))
+						&& t.getDate().toLocalDate().isBefore(d2))
+				.mapToDouble(t -> t.getAddition()).sum();
+		return revenue;
 	}
 }

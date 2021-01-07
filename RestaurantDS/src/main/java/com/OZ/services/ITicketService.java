@@ -13,5 +13,9 @@ public interface ITicketService {
 	List<Ticket> listerTicket(LocalDate date);
 
 	public double getAdd(TicketDto ticket) ;
+	
+	public double getRevenue(LocalDate d,String s);
+	
+ public double	getRevenuePourPeriode(LocalDate d1,LocalDate d2);
 
 }

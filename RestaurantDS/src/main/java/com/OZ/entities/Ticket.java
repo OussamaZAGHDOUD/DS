@@ -46,7 +46,7 @@ public class Ticket {
 	private List<Met> mets;
 	
 	public double getAddition() {
-		return mets.stream().mapToDouble(s->s.getPrix()).sum();
+		return mets.stream().mapToDouble(s->s.getPrix()).sum()   + this.tableResto.getSupplement();
 		//return addition;
 	}
 	@Override

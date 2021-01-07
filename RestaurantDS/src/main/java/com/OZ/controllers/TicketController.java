@@ -1,5 +1,6 @@
 package com.OZ.controllers;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -63,6 +64,21 @@ public class TicketController {
 	@GetMapping("/getAdd")
 	public double getAdd(@RequestBody TicketDto ticketDto) {
 		return iTicketService.getAdd(ticketDto);
+	}
+	
+	
+	@GetMapping("/getRevenue/{date}/{period}")
+	public double getRevenue(@PathVariable("date") String date,@PathVariable("period") String s) {
+		return iTicketService.getRevenue(LocalDate.parse(date),s);
+	}
+	
+	@GetMapping("/getRevenuePourPeriode/{d1}/{d2}")
+	public double getRevenuePourPeriode(@PathVariable("d1") String d1,@PathVariable("d2") String d2) {
+		LocalDate d11=LocalDate.parse(d1);
+		LocalDate d22=LocalDate.parse(d2);
+		if(d11.isAfter(d22))
+			 throw new DateTimeException("Dates invalides !");
+		return iTicketService.getRevenuePourPeriode(d11, d22);
 	}
 	
 	@ExceptionHandler(TicketNotFoundException.class)
