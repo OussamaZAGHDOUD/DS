@@ -8,6 +8,6 @@ public class DefaultController {
 
 	@RequestMapping({"/","/index"})
 	public String hello() {
-		return "hello world ! ";
+		return "<h1>hello world ! </h1>";
 	}
 }
