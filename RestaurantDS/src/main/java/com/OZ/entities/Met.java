@@ -26,12 +26,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @DiscriminatorColumn(name = "Type")
 @JsonSubTypes({ @Type(name = "Dessert", value = Dessert.class), @Type(name = "Entree", value = Entree.class),
 		@Type(name = "Plat", value = Plat.class) })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public  class Met {
+public abstract class Met {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -43,4 +42,11 @@ public  class Met {
 	@JsonIgnore
 	private List<Ticket>  tickets;
 	
+	public Met() {
+		
+	}
+	
+	public String getType() {
+		return this.getClass().getSimpleName();
+	}
 }

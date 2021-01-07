@@ -1,7 +1,9 @@
 package com.OZ.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import com.OZ.dto.MetDto;
 import com.OZ.entities.Dessert;
 import com.OZ.entities.Entree;
 import com.OZ.entities.Met;
@@ -25,7 +27,7 @@ public interface IMetService {
 	Plat modifierPlat(Plat plat);
 	Entree modifierEntree(Entree entree);
 	Dessert modifierDessert(Dessert Dessert);
+	MetDto platPlusAcheter(LocalDate d1,LocalDate d2);
 	
-	
-	
+	Met metMapper(MetDto met) ;
 }

@@ -1,5 +1,6 @@
 package com.OZ.controllers;
 
+import java.time.DayOfWeek;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -64,4 +65,15 @@ public class ClientController {
 	public ResponseEntity<String> handleNoSuchElementException(ClientNotFoundException e) {
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 	}
+	
+	@GetMapping("/plusFidele")
+	public ClientDto plusFidele() {
+		return iClientService.clientPlusFidele();
+	}
+	@GetMapping("/jourPlusReserve")
+	public DayOfWeek getJourPlusReserve(@RequestBody ClientDto clientDto) {
+		return iClientService.getJourPlusReserve(clientDto);
+	}
+	
+	
 }

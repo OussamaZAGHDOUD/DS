@@ -8,5 +8,7 @@ public interface ITableService {
 	TableResto supprimerTable(TableResto tableResto);
 	TableResto modifierTable(TableResto tableResto);
 	TableResto chercherTable(TableResto tableResto);
+	
+	TableResto plusReserve();
 
 }

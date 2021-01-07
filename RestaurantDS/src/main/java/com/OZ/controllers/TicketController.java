@@ -60,6 +60,10 @@ public class TicketController {
 	public Ticket supprimerTicket(@RequestBody TicketDto ticketDto) {
 		return iTicketService.supprimerTicket(ticketDto);
 	}
+	@GetMapping("/getAdd")
+	public double getAdd(@RequestBody TicketDto ticketDto) {
+		return iTicketService.getAdd(ticketDto);
+	}
 	
 	@ExceptionHandler(TicketNotFoundException.class)
 	public ResponseEntity<String> handleNoSuchElementException(TicketNotFoundException e) {

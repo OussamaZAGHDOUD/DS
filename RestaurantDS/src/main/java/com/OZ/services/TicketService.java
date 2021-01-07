@@ -35,27 +35,22 @@ public class TicketService implements ITicketService {
 
 	@Override
 	public TicketDto ajouterTicket(TicketDto ticketDto) {
-		
+
 		Client client = iClientService.chercherClient(ticketDto.getClient().getId());
 		TableResto table = tableRepository.findById(ticketDto.getTableResto().getNumero())
 				.orElseThrow(() -> new TableNotFoundException());
 
-		List<MetDto> listOfMetsDto = ticketDto.getMets();
-		List<Met> listOfMets;
+		List<MetDto> listMetDto=ticketDto.getMets();
+		List<Met> lis = listMetDto.stream().map( (s) -> iMetService.chercherMet(iMetService.metMapper(s))    ).collect(Collectors.toList());
+		ticketDto.setMets(null);
 		Ticket ticket = mapper.map(ticketDto, Ticket.class);
-		if (listOfMetsDto != null) {
-			listOfMets = listOfMetsDto.stream().map(m -> iMetService.chercherMet(mapper.map(m, Met.class)))
-					.collect(Collectors.toList());
-			ticket.setMets(listOfMets);
-		}
-
+		ticket.setMets(lis);
 		ticket.setClient(client);
 		ticket.setTableResto(table);
-		ticket = ticketRepository.save(ticket);
-		return mapper.map(ticket, TicketDto.class);
+		ticket=ticketRepository.save(ticket);
+		ticketDto = mapper.map(ticket, TicketDto.class);
+		return ticketDto;
 	}
-
-	
 
 	@Override
 	public Ticket supprimerTicket(TicketDto ticketDto) {
@@ -76,4 +71,7 @@ public class TicketService implements ITicketService {
 				.collect(Collectors.toList());
 	}
 
+	public double getAdd(TicketDto ticket) {
+		return chercherTicket(ticket).getAddition();
+	}
 }

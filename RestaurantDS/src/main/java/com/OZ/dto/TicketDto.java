@@ -19,10 +19,11 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 @Getter
 @Setter
+@ToString
 public class TicketDto {
-	
 	private Integer	numero;
 	@PastOrPresent
 	private LocalDateTime date;

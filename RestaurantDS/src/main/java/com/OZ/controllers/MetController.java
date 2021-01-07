@@ -1,17 +1,21 @@
 package com.OZ.controllers;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.OZ.dto.MetDto;
 import com.OZ.entities.Dessert;
 import com.OZ.entities.Entree;
 import com.OZ.entities.Met;
@@ -78,4 +82,18 @@ public class MetController {
 	public List<Met> listerMets (){
 		return metService.listerMets();
 	}
+	
+	@GetMapping("/plusAcheter/{d1}/{d2}")
+	public MetDto platPlusAcheter(@PathVariable("d1") String d1,@PathVariable("d2") String d2) {
+		
+		LocalDate dd1=LocalDate.parse(d1);
+		LocalDate dd2=LocalDate.parse(d2);
+		if(dd1.isAfter(dd2))
+			throw new DateTimeException("Date invalide ");
+		
+		return metService.platPlusAcheter(dd1,dd2);
+	}
+	
+	
+	
 }

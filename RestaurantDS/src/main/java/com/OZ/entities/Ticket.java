@@ -20,10 +20,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ticket {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,15 +39,19 @@ public class Ticket {
 	private Client client;
 	@ManyToOne
 	private TableResto tableResto; 
-	@ManyToMany(cascade = CascadeType.REMOVE)
+	@ManyToMany
 	@JoinTable(name = "MET_Ticket",
 		joinColumns = {@JoinColumn(name="Ticket_id")},
 		inverseJoinColumns = {@JoinColumn(name="Met_id")	})
 	private List<Met> mets;
 	
 	public double getAddition() {
-		//return mets.stream().mapToDouble(s->s.getPrix()).sum();
-		return addition;
+		return mets.stream().mapToDouble(s->s.getPrix()).sum();
+		//return addition;
 	}
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return numero+"  "+date+"  "+nbCouvert+"  "+addition;
+	}
 }

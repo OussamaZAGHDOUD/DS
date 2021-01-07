@@ -12,5 +12,6 @@ public interface ITicketService {
 	Ticket chercherTicket(TicketDto ticketDto);
 	List<Ticket> listerTicket(LocalDate date);
 
+	public double getAdd(TicketDto ticket) ;
 
 }

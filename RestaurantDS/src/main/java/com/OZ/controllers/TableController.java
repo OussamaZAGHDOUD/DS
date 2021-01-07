@@ -42,8 +42,10 @@ public class TableController {
 		return iTableService.chercherTable(tableResto);
 	}
 	
-	
-	
+	@GetMapping("/plusReservee")
+	public TableResto plusReserve() {
+		return iTableService.plusReserve();
+	}
 	
 	
 	
