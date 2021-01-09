@@ -1,6 +1,4 @@
-package com.OZ.config;
-
-import org.springframework.beans.factory.annotation.Autowired;
+package com.OZ.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,32 +8,30 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-	@Autowired
-	private UserDetailsService userDetailsService;
+@Data
+@AllArgsConstructor
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	
+	UserDetailsService userDetailsService;
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// Set your configuration in the auth object !
-		auth.userDetailsService(userDetailsService);
 		
+		auth.userDetailsService(userDetailsService);
 	}
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-			// set your Authorization config !
-		http.authorizeRequests()
-		.regexMatchers("/ticket/.*","/client/.*","/table/.*","/met/.*").hasRole("USER")
-		.regexMatchers("/.*").permitAll()
-		.and().formLogin();
+	//http.cors().and().csrf().disable().authorizeRequests().antMatchers("/**").hasRole("USER").and().formLogin();
+		
+		http.authorizeRequests().antMatchers("/index").hasRole("ADMIN")
+		.antMatchers("/**").hasRole("USER").and().formLogin();
 		
 	}
-	
 	@Bean
-	public PasswordEncoder getPasswordEncoder() {
-		return NoOpPasswordEncoder.getInstance(); 
+	public PasswordEncoder getPasswordEncoder()
+	{
+		return  NoOpPasswordEncoder.getInstance();
 	}
-
 }

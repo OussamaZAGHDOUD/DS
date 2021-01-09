@@ -93,9 +93,10 @@ public class ClientService implements IClientService {
 
 		List<DayOfWeek> listOfDays = listOfTickets.stream().map(t -> t.getDate().getDayOfWeek())
 				.collect(Collectors.toList());
+		
 		int max = 0;
 		DayOfWeek day = null;
-		for (DayOfWeek d : listOfDays) {
+		for (DayOfWeek d : listOfDays.stream().distinct().collect(Collectors.toList())) {
 
 			int nbr = Collections.frequency(listOfDays, d);
 			if (max < nbr) {
