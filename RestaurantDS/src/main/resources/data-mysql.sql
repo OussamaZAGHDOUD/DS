@@ -11,9 +11,3 @@ INSERT INTO `met` (`type`, `id`, `nom`, `prix`) VALUES('Dessert', 6, 'fruits', 6
 INSERT INTO `met` (`type`, `id`, `nom`, `prix`) VALUES('Dessert', 7, '7low', 6);
 INSERT INTO `table_resto` (`numero`, `nb_couvert`, `supplement`, `type`) VALUES (1, 5, 4, 'petite terrasse');
 INSERT INTO `table_resto` (`numero`, `nb_couvert`, `supplement`, `type`) VALUES (2, 2, 2, 'grand terrasse');
-INSERT INTO `user` (`id`, `active`, `password`, `user_name`) VALUES ('1', b'0001', 'oussama', 'oussama');
-INSERT INTO `user` (`id`, `active`, `password`, `user_name`) VALUES ('2', b'0001', 'mehdi', 'mehdi');
-INSERT INTO `role` (`id`, `role`) VALUES ('1', 'ROLE_USER');
-INSERT INTO `role` (`id`, `role`) VALUES ('2', 'ROLE_ADMIN');
-INSERT INTO `role_user` (`role_id`, `user_id`) VALUES ('1', '1');
-INSERT INTO `role_user` (`role_id`, `user_id`) VALUES ('2', '2');
