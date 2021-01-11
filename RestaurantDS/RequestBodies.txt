@@ -1,4 +1,19 @@
 *****
+Post :
+http://localhost:9090/authenticate
+{
+    "username":"oussama", "password":"oussama"
+}
+
+using Postman , in the headers part past that key and value( change JWTcode by the response body of the authentication request !)
+Key :Authorization     Value :Bearer JWTcode
+http://localhost:9090/
+http://localhost:9090/index
+
+
+
+
+
 
 -> Ajouter un client 
 
