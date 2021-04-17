@@ -1,3 +1,25 @@
+*****
+Post :
+http://localhost:9090/authenticate
+{
+    "username":"oussama", "password":"oussama"
+}
+
+using Postman , in the headers part past that key and value( change JWTcode by the response body of the authentication request !)
+Key :Authorization     Value :Bearer JWTcode
+http://localhost:9090/
+http://localhost:9090/index
+
+
+
+
+
+
+-> Ajouter un client 
+
+Post :
+http://localhost:9090/client/ajouter
+
 { 
     "nom":"oussama",
     "prenom":"zaghdoud",
@@ -5,3 +27,64 @@
 	"courriel":"oussamazaghdoud1991@gmail.com",
 	"telephone":"27652211"
 }
+
+
+-> Ajouter un Plat 
+
+Post : 
+http://localhost:9090/met/ajouter/plat
+{
+"nom":"Kosksi",
+"prix":"20"
+}
+
+
+-> Ajouter une Table 
+
+Post :
+http://localhost:9090/table/ajouter
+{
+    "nbCouvert":"2",
+    "supplement":"2",
+    "type":"grand terrasse"
+}
+
+
+-> Ajouter une Ticket 
+
+Post: 
+http://localhost:9090/ticket/ajouter
+{
+       "date": "2010-05-01T13:09:40",   
+      "nbCouvert": 2,    
+       "addition": 2.0, 
+        "client": {         "id": 1     },
+       "tableResto": { "numero": 1  },
+          "mets": [
+              {"id":"1","type":"Plat"},
+              {"id":"2","type":"Plat"}
+              ]
+}
+
+
+-> Donner la table la plus reservée
+Get :
+http://localhost:9090/table/plusReservee
+
+-> Donner le client le plus fidele 
+Get :
+http://localhost:9090/client/plusFidele
+
+
+-> le Plat le plus acheté pour une periode donnée
+Get :
+http://localhost:9090/met/plusAcheter/2010-05-01/2010-05-02
+
+
+-> Pour un client donné , trouver le jour le plus reservé( weekday )
+Get :
+http://localhost:9090/client/jourPlusReserve
+
+->Retourner le revenue par mois , jour, semaine selon le dernier mot du requette :
+Get :
+http://localhost:9090/ticket/getRevenue/2021-01-07/mois
